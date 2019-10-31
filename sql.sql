@@ -1,8 +1,23 @@
 -- 1) Go back to the dvdrental database, and get the average, standard deviation, and count
 -- of each customer's lifetime spending. (This is a lot like yesterday's warmup).
 
+*** QUERY ***
+
+WITH spend_per_customer AS (
+    SELECT customer_id, SUM(amount) as total_spent
+    FROM payment
+    GROUP BY customer_id
+)
+
+SELECT COUNT(total_spent), AVG(total_spent),stddev_samp(total_spent)
+FROM spend_per_customer;
 
 
+*** RESULT ***
+
+ count |         avg          |     stddev_samp
+-------+----------------------+---------------------
+   599 | 102.3573288814691152 | 25.2321195449925139
 
 
 
